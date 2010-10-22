@@ -1,3 +1,25 @@
+# -*- coding: utf8 -*-
+"""
+    reblok, python decompiler, AST builder
+    Copyright (C) 2010  Guillaume Bour <guillaume@bour.cc>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, version 3.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+__author__  = "Guillaume Bour <guillaume@bour.cc>"
+__version__ = "$Revision$"
+__date__    = "$Date$"
+__license__ = "GPLv3"
+
 
 # opcode constants
 
@@ -6,23 +28,26 @@ LIST      = 'list'
 AT        = 'at'
 SLICE     = 'slice'
 IN        = 'in'
-APPEND    = 'append'
+NIN       = 'not in'
 
 ## dict
 DICT      = 'dict'
-KV	      = 'keyval'
-
-CONST     = 'const'
-VAR       = 'var'
 ATTR      = 'attr'
 
-CALL      = 'call'
+## 
+CONST     = 'const'
+VAR       = 'var'
 SET       = 'set'
 
+## function
+FUNC      = 'function'
+CALL      = 'call'
 
+## boolean ops
 AND       = 'and'
 OR        = 'or'
 NOT       = 'not'
+INVERT    = 'invert'
 
 EQ        = 'eq'
 NEQ       = 'neq'
@@ -31,17 +56,30 @@ GT        = 'gt'
 LEQ       = 'leq'
 GEQ       = 'geq'
 
+## arithmetic ops
+MINUS     = 'positive'
+PLUS      = 'negative'
+
 ADD       = 'add'
 SUB       = 'sub'
 MUL       = 'mul'
 DIV       = 'div'
 MOD       = 'mod'
 
+##
 RET       = 'ret'
-
 IF        = 'if'
 FOR       = 'for'
 
+## IMPORT 
+IMPORT    = 'import'
+PRINT     = 'print'
+CONVERT   = 'convert'
+
+UNDEF     = '<undef>'
+LAMBDA    = '<lambda>'
+
+## temp. Do not use outside of reblok
 MARKER_MAP      = 'marker::map'
 MARKER_IFFALSE  = 'marker::iffalse'
 MARKER_IFTRUE   = 'marker::iftrue'

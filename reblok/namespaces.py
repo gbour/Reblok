@@ -20,5 +20,7 @@ __version__ = "$Revision$"
 __date__    = "$Date$"
 __license__ = "GPLv3"
 
-import opcodes
-from py2ast import *
+GLOBAL = 'global'
+LOCAL  = 'local'
+DEREF  = 'deref'
+
