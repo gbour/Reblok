@@ -14,5 +14,5 @@ setup(
 	license      = 'GPL v3',
 
 	packages=['reblok'],
-	#	data_files('/usr/share/reblok', [
+	requires=['byteplay'],
 )
