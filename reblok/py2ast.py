@@ -86,7 +86,7 @@ class Parser(object):
 		c = byte.Code.from_code(code.func_code if hasattr(code, 'func_code') else code)
 		#print c.code
 		#print c.args, c.freevars, c.newlocals, c.varargs, c.varkwargs
-		#print code.func_code.co_varnames, code.func_code.co_freevars, code.func_code.co_cellvars
+		#print code.func_code.co_varnames, code.func_code.co_freevars,	code.func_code.co_cellvars, code.func_closure
 
 		ast, _globals = self._walk(c.code)
 		if not isinstance(code, types.FunctionType):
@@ -101,7 +101,12 @@ class Parser(object):
 		kwvararg = args.pop()[0] if c.varkwargs else None
 		vararg   = args.pop()[0] if c.varargs else None
 
-		return [opcodes.FUNC, code.func_name, ast, args,  vararg, kwvararg, _globals, None]
+		freevars = {}
+		for i in xrange(len(code.func_code.co_freevars)):
+			freevars[code.func_code.co_freevars[i]] = code.func_closure[i].cell_contents
+		#TODO: cellvars
+
+		return [opcodes.FUNC, code.func_name, ast, args,  vararg, kwvararg, _globals, freevars]
 
 	def _walk(self, code):
 		self.covargs = {}
