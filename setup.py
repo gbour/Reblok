@@ -2,7 +2,21 @@
 
 __version__ = "$Revision$ $Date$"
 
-from distutils.core import setup
+import subprocess
+from distutils.core import setup, Command
+
+class BuildDebianPackage(Command):
+	description = "create a debian package"
+	user_options = []
+
+	def initialize_options(self):
+		pass
+
+	def finalize_options(self):
+		pass
+
+	def run(self):
+		subprocess.call(['dpkg-buildpackage'])
 
 setup(
 	name         = 'reblok',
@@ -15,4 +29,6 @@ setup(
 
 	packages=['reblok'],
 	requires=['byteplay'],
+
+	cmdclass={'bdist_deb': BuildDebianPackage}
 )
