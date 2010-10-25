@@ -407,7 +407,9 @@ class Parser(object):
 		kwvararg = args.pop()[0] if func.varkwargs else None
 		vararg   = args.pop()[0] if func.varargs else None
 
-		self.stack.append([opcodes.FUNC, oparg, xfunc, args, vararg, kwvararg, _globals, None])
+		#TODO: handle freevars and cellvars
+
+		self.stack.append([opcodes.FUNC, oparg, xfunc, args, vararg, kwvararg, _globals, {}])
 
 	def do_STORE_DEREF(self, attr):
 		self.stack.append((opcodes.SET, (opcodes.VAR, attr, namespaces.DEREF), self.stack.pop()))
