@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 """
     reblok, python decompiler, AST builder
-    Copyright (C) 2010  Guillaume Bour <guillaume@bour.cc>
+    Copyright (C) 2010-2011, Guillaume Bour <guillaume@bour.cc>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
