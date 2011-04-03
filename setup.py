@@ -57,7 +57,8 @@ setup(
 
 	long_description = """Reblok build an Abstract Syntax Tree (AST) from python bytecode
 
-	Example:
+	Example::
+
 	>>> from reblok import Parser
 	>>> add = lambda x: x + 1
 	>>> print Parser().walk(add)
@@ -65,7 +66,7 @@ setup(
 	""",
 
 	packages=['reblok'],
-	data_files=[('share/doc/python-reblok', ('README',))],
+	data_files=[('share/doc/python-reblok', ('README.md','AUTHORS','COPYING'))],
 	requires=['byteplay (>= 0.2)'],
 
 	cmdclass={'bdist_deb': BuildDebianPackage}
