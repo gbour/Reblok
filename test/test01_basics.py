@@ -421,6 +421,94 @@ class TestReblokBasics(unittest.TestCase):
 		])
 
 
+	def test_10list(self):
+		tree = self.parser.walk(lambda x: x in [1,2])
+		self.assertEqual(tree,
+			[op.FUNC, op.LAMBDA,
+				[[op.RET, (op.IN, (op.VAR, 'x', ns.LOCAL), (op.CONST, (1,2)))]],
+				[('x', op.UNDEF)], None, None, [], {}
+		])
+
+		def fnc():
+			l = [1,2]
+			return x in l
+		tree = self.parser.walk(fnc)
+		self.assertEqual(tree,
+			[op.FUNC, 'fnc', [
+					(op.SET, (op.VAR, 'l', ns.LOCAL), (op.LIST, [(op.CONST, 1), (op.CONST, 2)])),
+					[op.RET, (op.IN, (op.VAR, 'x', ns.GLOBAL), (op.VAR, 'l', ns.LOCAL))]
+				], [], None, None, ['x'], {}
+		])
+
+	def test_11loop(self):
+		def fnc():
+			for i in xrange(10):
+				print i
+		tree = self.parser.walk(fnc)
+		self.assertEqual(tree,
+			[op.FUNC, 'fnc', [
+				[op.FOR, 'i', 
+					[op.CALL, (op.VAR, 'xrange', ns.GLOBAL), [(op.CONST, 10)], {}, None, None],
+					[(op.PRINT, None, [(op.VAR, 'i', ns.LOCAL), (op.CONST, '\n')])],
+					None],
+				[op.RET, (op.CONST, None)]
+				], [], None, None, ['xrange'], {}
+		])
+
+	def test_12print(self):
+		def printall():
+			#NOTE: when python compiler find *print* instructions following each others,
+			# it merge it to have only on print call in bytecode 
+			# base types, variable, function result
+			print 10, (1+2), "pouët", False, a, foo()
+			# % operator
+			print "%d - %s\n %s" % (24, "Zzzz", True)
+			# .format() method
+			print "{1} -- {2}".format(a, b)
+
+			# no newline
+			z=1 # just to be sure have a new print instruction
+			print "blablabla",
+
+			# out stream
+			z=1
+			print >>myfile, "hoho", 17
+			# as output stream is different, should produce a separate print instruction
+			print >>otherfile, "bar", u"fôo"
+
+		tree = self.parser.walk(printall)
+		self.assertEqual(tree,
+			[op.FUNC, 'printall', [
+					(op.PRINT, None, [
+						# 1st print
+						(op.CONST, 10), 
+						(op.CONST, 3), 
+						(op.CONST, 'pouët'), 
+						(op.CONST, False),
+						(op.VAR, 'a', ns.GLOBAL),
+						[op.CALL, (op.VAR, 'foo', ns.GLOBAL), [], {}, None, None],
+						(op.CONST, '\n'),
+						# 2d print
+						(op.MOD, (op.CONST, "%d - %s\n %s"), (op.TUPLE, [(op.CONST, 24), (op.CONST, "Zzzz"), (op.CONST, True)])),
+						(op.CONST, '\n'),
+						# 3d print
+						[op.CALL, (op.ATTR, (op.CONST, "{1} -- {2}"), 'format'), [(op.VAR, 'a', ns.GLOBAL), (op.VAR, 'b', ns.GLOBAL)], {}, None, None],
+						(op.CONST, '\n'),
+					]),
+
+					(op.SET, (op.VAR, 'z', ns.LOCAL), (op.CONST, 1)),
+					(op.PRINT, None, [(op.CONST, "blablabla")]),
+
+					(op.SET, (op.VAR, 'z', ns.LOCAL), (op.CONST, 1)),
+					(op.PRINT, (op.VAR, 'myfile', ns.GLOBAL), [(op.CONST, 'hoho'), (op.CONST, 17), (op.CONST, '\n')]),
+
+					(op.PRINT, (op.VAR, 'otherfile', ns.GLOBAL), [(op.CONST, 'bar'), (op.CONST, u'fôo'), (op.CONST, '\n')]),
+
+					[op.RET, (op.CONST, None)]
+				], [], None, None, ['a', 'b', 'foo', 'myfile', 'otherfile'], {}
+		])
+
+
 	def test_20funcdef(self):
 		tree = self.parser.walk(lambda u: foo())
 		self.assertEqual(tree,
