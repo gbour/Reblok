@@ -25,6 +25,7 @@ __license__ = "GPLv3"
 
 ## list
 LIST      = 'list'
+TUPLE     = 'tuple'
 AT        = 'at'
 SLICE     = 'slice'
 IN        = 'in'

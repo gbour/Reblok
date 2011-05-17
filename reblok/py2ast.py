@@ -266,7 +266,7 @@ class Parser(object):
 		elts = self.stack[-attr:]
 		del self.stack[-attr:]
 
-		self.stack.append((opcodes.LIST, elts))
+		self.stack.append((opcodes.TUPLE, elts))
 
 	def do_BUILD_LIST(self, attr):
 		"""Build a list

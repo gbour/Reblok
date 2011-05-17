@@ -22,3 +22,4 @@ __license__ = "GPLv3"
 
 import opcodes
 from py2ast import *
+from reblok import Reblok
