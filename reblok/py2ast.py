@@ -338,7 +338,7 @@ class Parser(object):
 
 	### FUNCTIONS ###
 
-	def do_CALL_FUNCTION(self, attr):
+	def do_CALL_FUNCTION(self, attr, vaarg=None, vakwarg=None):
 		"""
 		
 			attr: function arguments count (taken from top stack)
@@ -359,7 +359,7 @@ class Parser(object):
 			args = self.stack[-lowb:]
 			del self.stack[-lowb:]
 		
-		self.stack.append([opcodes.CALL, self.stack.pop(), args, kwargs, None, None])
+		self.stack.append([opcodes.CALL, self.stack.pop(), args, kwargs, vaarg, vakwarg])
 
 		#
 		if self.code.predict()[0] == byte.POP_TOP:
@@ -367,15 +367,15 @@ class Parser(object):
 
 	def do_CALL_FUNCTION_VAR(self, attr):
 		args = self.stack.pop()
-		self.do_CALL_FUNCTION(attr)
-
-		self.stack[-1][4] = args
+		self.do_CALL_FUNCTION(attr, vaarg=args)
 
 	def do_CALL_FUNCTION_KW(self, attr):
 		kwargs = self.stack.pop()
-		self.do_CALL_FUNCTION(attr)
+		self.do_CALL_FUNCTION(attr, vakwarg=kwargs)
 
-		self.stack[-1][5] = kwargs
+	def do_CALL_FUNCTION_VAR_KW(self, attr):
+		args, kwargs = self.stack.pop(-2), self.stack.pop()
+		self.do_CALL_FUNCTION(attr, args, kwargs)
 
 	def do_MAKE_FUNCTION(self, attr):
 		"""
@@ -525,8 +525,8 @@ class Parser(object):
 	### BOOLEAN OPS ###
 
 	COMPARE_MAP = {
-		'is'    : opcodes.EQ,
-		'is not': opcodes.NEQ,
+		'is'    : opcodes.ID,
+		'is not': opcodes.NID,
 		'=='    : opcodes.EQ,
 		'!='    : opcodes.NEQ,
 		'>'     : opcodes.GT,

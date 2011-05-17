@@ -55,6 +55,8 @@ LT        = 'lt'
 GT        = 'gt'
 LEQ       = 'leq'
 GEQ       = 'geq'
+ID        = 'id'
+NID       = 'nid'
 
 ## arithmetic ops
 MINUS     = 'positive'
