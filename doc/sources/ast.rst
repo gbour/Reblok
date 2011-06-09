@@ -330,13 +330,11 @@ LIST
 
 Build a list.
 
-Note: I do not make distinction between tuples and lists. Both ends as a **LIST** node.
-
 Example::
 
   colors = ['red', 'blue', 'white', 'cyan']
 
-  (SET, (VAR, 'colors'), (LIST, ['red', 'blue', 'white', 'cyan']))
+  (SET, (VAR, 'colors'), (LIST, [(CONST, 'red'), (CONST, 'blue'), (CONST, 'white'), (CONST, 'cyan')]))
 
 LEQ
 ...
@@ -561,6 +559,18 @@ Example::
  result = beer_cnt - 1
 
  (SET, (VAR, 'result'), (SUB, (VAR, 'beer_cnt'), 1))
+
+TUPLE
+....
+**(TUPLE, [values])**
+
+Build a tuple (static-length list).
+
+Example::
+
+  colors = ('red', 'blue', 'white', 'cyan')
+
+  (SET, (VAR, 'colors'), (TUPLE, [(CONST, 'red'), (CONST, 'blue'), (CONST, 'white'), (CONST, 'cyan')]))
 
 VAR
 ...

@@ -18,7 +18,8 @@ __license__ = """
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 import subprocess
-from distutils.core import setup, Command
+#from distutils.core import setup, Command
+from setuptools import setup, Command
 
 class BuildDebianPackage(Command):
 	description = "Build debian package"
@@ -30,7 +31,7 @@ class BuildDebianPackage(Command):
 
 setup(
 	name         = 'reblok',
-	version      = '0.1.0',
+	version      = '0.1.1',
 	description  = 'Python decompiler',
 	author       = 'Guillaume Bour',
 	author_email = 'guillaume@bour.cc',
@@ -65,6 +66,7 @@ setup(
 	['function', '<lambda>', [['ret', ('add', ('var', 'x', 'local'), ('const', 1))]], [('x', '<undef>')], None, None, [], {}]
 	""",
 
+	scripts=['bin/reblok'],
 	packages=['reblok'],
 	data_files=[('share/doc/python-reblok', ('README.md','AUTHORS','COPYING'))],
 	requires=['byteplay (>= 0.2)'],
