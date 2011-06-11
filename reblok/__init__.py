@@ -20,6 +20,8 @@ __version__ = "$Revision$"
 __date__    = "$Date$"
 __license__ = "GPLv3"
 
+VERSION = '0.1.1'
+
 import opcodes
 from py2ast import *
 from reblok import Reblok
