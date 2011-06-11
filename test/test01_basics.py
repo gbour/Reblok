@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf8 -*-
 import unittest
 from reblok import Parser, namespaces as ns, opcodes as op
