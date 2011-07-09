@@ -69,7 +69,7 @@ setup(
 	scripts=['bin/reblok'],
 	packages=['reblok'],
 	data_files=[('share/doc/python-reblok', ('README.md','AUTHORS','COPYING'))],
-	requires=['byteplay (>= 0.2)'],
+	install_requires=['byteplay (>= 0.2)'],
 
 	cmdclass={'bdist_deb': BuildDebianPackage}
 )
