@@ -23,4 +23,4 @@ __license__ = "GPLv3"
 GLOBAL = 'global'
 LOCAL  = 'local'
 DEREF  = 'deref'
-
+NAME   = 'name'

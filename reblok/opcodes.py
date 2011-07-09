@@ -39,6 +39,7 @@ ATTR      = 'attr'
 CONST     = 'const'
 VAR       = 'var'
 SET       = 'set'
+DEL       = 'del'
 
 ## function
 FUNC      = 'function'

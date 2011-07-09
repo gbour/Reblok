@@ -180,8 +180,11 @@ class Parser(object):
 		self.stack.append((opcodes.VAR, attr, namespaces.LOCAL))
 
 	def do_DELETE_FAST(self, attr):
-		"""do nothing"""
-		pass
+		""" """
+		self.stack.append((opcodes.DEL, (opcodes.VAR, attr, namespaces.LOCAL)))
+
+	def do_DELETE_GLOBAL(self, attr):
+		self.stack.append((opcodes.DEL, (opcodes.VAR, attr, namespaces.GLOBAL)))
 
 	def do_LOAD_ATTR(self, attr):
 		"""Stacking up attribute
@@ -190,8 +193,14 @@ class Parser(object):
 		"""
 		self.stack.append((opcodes.ATTR, self.stack.pop(), attr))
 
+	def do_STORE_ATTR(self, attr):
+		self.stack.append((opcodes.SET, (opcodes.ATTR, self.stack.pop(), attr), self.stack.pop()))
+
 	def do_LOAD_NAME(self, attr):
-		self.stack.append((opcodes.VAR, attr))
+		self.stack.append((opcodes.VAR, attr, namespaces.NAME))
+
+	def do_DELETE_NAME(self, attr):
+		self.stack.append((opcodes.DEL, (opcodes.VAR, attr, namespaces.NAME)))
 
 	def do_RETURN_VALUE(self, attr):
 		"""Return TOS value (popped from stack)
@@ -875,3 +884,12 @@ class Parser(object):
 			
 			self.jumps[key] = j2
 
+	### CLASS ###
+	def do_LOAD_LOCALS(self, attr):
+		""" Used for classes definition
+			Ignore from now as we do not support classes yet
+		"""
+		pass
+
+	def do_BUILD_CLASS(self, attr):
+		pass

@@ -1,5 +1,26 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
+"""
+    reblok, python decompiler, AST builder
+    Copyright (C) 2010-2011, Guillaume Bour <guillaume@bour.cc>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, version 3.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+__author__  = "Guillaume Bour <guillaume@bour.cc>"
+__version__ = "$Revision$"
+__date__    = "$Date$"
+__license__ = "GPLv3"
+
 import unittest
 from reblok import Parser, namespaces as ns, opcodes as op
 
@@ -508,6 +529,28 @@ class TestReblokBasics(unittest.TestCase):
 				], [], None, None, ['a', 'b', 'foo', 'myfile', 'otherfile'], {}
 		])
 
+	def test_13delete(self):
+		# delete a variable
+		c = False
+		def func(b):
+			a = 23
+			# DELETE_FAST
+			del a
+			# DELETE_FAST
+			del b
+			# DELETE_GLOBAL
+			global c
+			del c
+		tree = self.parser.walk(func)
+		self.assertEqual(tree,
+			[op.FUNC, 'func',
+				[(op.SET, (op.VAR, 'a', ns.LOCAL), (op.CONST, 23)),
+				 (op.DEL, (op.VAR, 'a', ns.LOCAL)),
+				 (op.DEL, (op.VAR, 'b', ns.LOCAL)),
+				 (op.DEL, (op.VAR, 'c', ns.GLOBAL)),
+				 [op.RET, (op.CONST, None)]
+				], [('b', '<undef>')], None, None, [], {}
+		])
 
 	def test_20funcdef(self):
 		tree = self.parser.walk(lambda u: foo())
