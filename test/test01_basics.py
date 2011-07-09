@@ -468,7 +468,7 @@ class TestReblokBasics(unittest.TestCase):
 		tree = self.parser.walk(fnc)
 		self.assertEqual(tree,
 			[op.FUNC, 'fnc', [
-				[op.FOR, 'i', 
+				[op.FOR, (op.VAR, 'i', ns.LOCAL), 
 					[op.CALL, (op.VAR, 'xrange', ns.GLOBAL), [(op.CONST, 10)], {}, None, None],
 					[(op.PRINT, None, [(op.VAR, 'i', ns.LOCAL), (op.CONST, '\n')])],
 					None],
@@ -551,6 +551,64 @@ class TestReblokBasics(unittest.TestCase):
 				 [op.RET, (op.CONST, None)]
 				], [('b', '<undef>')], None, None, [], {}
 		])
+
+	def test_13delete(self):
+		# delete a variable
+		c = False
+		def func(b):
+			a = 23
+			# DELETE_FAST
+			del a
+			# DELETE_FAST
+			del b
+			# DELETE_GLOBAL
+			global c
+			del c
+		tree = self.parser.walk(func)
+		self.assertEqual(tree,
+			[op.FUNC, 'func',
+				[(op.SET, (op.VAR, 'a', ns.LOCAL), (op.CONST, 23)),
+				 (op.DEL, (op.VAR, 'a', ns.LOCAL)),
+				 (op.DEL, (op.VAR, 'b', ns.LOCAL)),
+				 (op.DEL, (op.VAR, 'c', ns.GLOBAL)),
+				 [op.RET, (op.CONST, None)]
+				], [('b', '<undef>')], None, None, [], {}
+		])
+
+
+	def test_14unpackseq(self):
+		# simple unpack
+		def func():
+			global b
+			(a, b, c[0]) = (10, 11, 12)
+		tree = self.parser.walk(func)
+		self.assertEqual(tree, 
+			[op.FUNC, 'func',
+				[(op.SET, (op.TUPLE, 
+					 ((op.VAR, 'a', ns.LOCAL), 
+						(op.VAR, 'b', ns.GLOBAL), 
+						(op.AT, (op.VAR, 'c', ns.GLOBAL), (op.CONST, 0))
+					 )), (op.CONST, (10, 11, 12))),
+				 [op.RET, (op.CONST, None)]
+				], [], None, None, ['b', 'c'], {}
+		])
+			# unpack in loop
+		def func():
+			global b
+
+			l = ((1,2), (3,4))
+			for (a, b) in l:
+				c = 0
+		tree = self.parser.walk(func)
+		self.assertEqual(tree,
+			[op.FUNC, 'func',
+				[(op.SET, (op.VAR, 'l', ns.LOCAL), (op.TUPLE, [(op.CONST, (1,2)), (op.CONST, (3,4))])),
+				 [op.FOR, (op.TUPLE, ((op.VAR, 'a', ns.LOCAL), (op.VAR, 'b', ns.GLOBAL))), (op.VAR, 'l', ns.LOCAL),
+					 [(op.SET, (op.VAR, 'c', ns.LOCAL), (op.CONST, 0))], None],
+				 [op.RET, (op.CONST, None)]
+				], [], None, None, ['b'], {}
+		])
+
 
 	def test_20funcdef(self):
 		tree = self.parser.walk(lambda u: foo())

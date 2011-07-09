@@ -84,7 +84,7 @@ class Parser(object):
 		"""Main parser loop
 		"""
 		c = byte.Code.from_code(code.func_code if hasattr(code, 'func_code') else code)
-		#print c.code
+		#print c.code#; return
 		#print c.args, c.freevars, c.newlocals, c.varargs, c.varkwargs
 		#print code.func_code.co_varnames, code.func_code.co_freevars,	code.func_code.co_cellvars, code.func_closure
 
@@ -253,17 +253,30 @@ class Parser(object):
 			ret[1] = self.stack.pop()
 			self.stack.append(ret)
 
-	def do_STORE_FAST(self, attr):
-		"""Affect TOS value to attr variable"""
-		self.stack.append((opcodes.SET, (opcodes.VAR, attr, namespaces.LOCAL), self.stack.pop()))
+	def do_STORE_FAST(self, attr, sub=False):
+		"""Affect TOS value to attr variable
+		
+			If called from UNPACK_SEQUENCE (sub=True), we are only interested in variable definition
+		"""
+		var = (opcodes.VAR, attr, namespaces.LOCAL)
+		if sub:
+			return var
+
+		self.stack.append((opcodes.SET, var, self.stack.pop()))
 
 	def do_STORE_NAME(self, attr):
 		self.stack.append((opcodes.SET, (opcodes.VAR, attr), self.stack.pop()))
 
-	def do_STORE_GLOBAL(self, attr):
-		self.stack.append((opcodes.SET, (opcodes.VAR, attr, namespaces.GLOBAL), self.stack.pop()))
-
+	def do_STORE_GLOBAL(self, attr, sub=False):
+		"""
+			If called from UNPACK_SEQUENCE (sub=True), we are only interested in variable definition
+		"""
+		var = (opcodes.VAR, attr, namespaces.GLOBAL)
 		self.globals[attr] = None
+		if sub:
+			return var
+
+		self.stack.append((opcodes.SET, var, self.stack.pop()))
 
 	### LISTS ###
 
@@ -290,9 +303,12 @@ class Parser(object):
 		self.stack.append((opcodes.LIST, self.stack[-attr:]))
 		del self.stack[-attr-1:-1]
 
-	def do_STORE_SUBSCR(self, attr):
-		self.stack[-1] = (opcodes.SET, (opcodes.AT, self.stack.pop(-2), self.stack[-1]),
-				self.stack.pop(-2))
+	def do_STORE_SUBSCR(self, attr, sub=False):
+		var = (opcodes.AT, self.stack.pop(-2), self.stack.pop())
+		if sub:
+			return var
+
+		self.stack.append((opcodes.SET, var,	self.stack.pop(-2)))
 
 	def do_BINARY_SUBSCR(self, attr):
 		""" list[10] 
@@ -344,6 +360,34 @@ class Parser(object):
 		#self.stack.append([opcodes.APPEND, self.stack.pop(), value])
 		self.stack.append([opcodes.CALL, (opcodes.ATTR, self.stack.pop(), 'append'),
 			(value,), {}, None, None])
+
+	def do_UNPACK_SEQUENCE(self, attr, sub=False):
+		"""
+			opcode= UNPACK_SEQUENCE 2
+
+			UNPACK_SEQUENCE members may be: STORE_FAST, STORE_GLOBAL, STORE_SUBSCR
+
+			UNPACK_SEQUENCE may be "loop variable" of FOR_ITER.
+			In this case, sub is True, and we return TUPLE as target loop variable
+		"""
+		#if not sub:
+		#	src = self.stack.pop()
+		dst = []
+		for i in xrange(attr):
+			opcode, arg = self.code.nexthop()
+			#assert opcode in (byte.STORE_FAST, byte.STORE_GLOBAL)
+			#NOTE: STORE_SUBSCR is precedeed by variable name and index position (LOAD_XXX)
+			while opcode not in (byte.STORE_FAST, byte.STORE_GLOBAL, byte.STORE_SUBSCR):
+				getattr(self, 'do_%s' % opcode)(arg)
+				opcode, arg = self.code.nexthop()
+
+			dst.append(getattr(self, 'do_%s' % opcode)(arg, sub=True))
+
+		dst = (opcodes.TUPLE, tuple(dst))
+		if sub:
+			return dst
+		self.stack.append((opcodes.SET, dst, self.stack.pop()))
+
 
 	### FUNCTIONS ###
 
@@ -734,14 +778,25 @@ class Parser(object):
 		self.stack.append([opcodes.FOR, None, cond, None, ret])
 
 	def do_FOR_ITER(self, attr):
+		"""
+			FOR_ITER opcode is followed by the loop variable, which may be:
+				. a STORE_XXX opcode
+				. a UNPACK_SEQUENCE
+		"""
 		assert self.stack[-1][0] == opcodes.FOR
 		
 		node = self.jumps.setdefault(attr, [])
 		self.jumps[attr].insert(0, self.stack[-1])
 
-		if self.code.predict()[0] in [byte.STORE_FAST, byte.STORE_NAME]:
-			 opcode, attr = self.code.nexthop()
-			 self.stack[-1][1] = attr
+		# get loop variable
+		opcode, arg = self.code.nexthop()
+		if opcode not in (byte.STORE_FAST, byte.STORE_GLOBAL, byte.UNPACK_SEQUENCE):
+			#NOTE: STORE_SUBSCR is precedeed by variable name and index position (LOAD_XXX)
+			while opcode != byte.STORE_SUBSCR:
+				getattr(self, 'do_%s' % opcode)(arg)
+				opcode, arg = self.code.nexthop()
+
+		self.stack[-1][1] = getattr(self, 'do_%s' % opcode)(arg, sub=True)
 
 	def do_LABEL(self, label):
 		if label not in self.jumps:
