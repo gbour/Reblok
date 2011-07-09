@@ -529,28 +529,6 @@ class TestReblokBasics(unittest.TestCase):
 				], [], None, None, ['a', 'b', 'foo', 'myfile', 'otherfile'], {}
 		])
 
-	def test_13delete(self):
-		# delete a variable
-		c = False
-		def func(b):
-			a = 23
-			# DELETE_FAST
-			del a
-			# DELETE_FAST
-			del b
-			# DELETE_GLOBAL
-			global c
-			del c
-		tree = self.parser.walk(func)
-		self.assertEqual(tree,
-			[op.FUNC, 'func',
-				[(op.SET, (op.VAR, 'a', ns.LOCAL), (op.CONST, 23)),
-				 (op.DEL, (op.VAR, 'a', ns.LOCAL)),
-				 (op.DEL, (op.VAR, 'b', ns.LOCAL)),
-				 (op.DEL, (op.VAR, 'c', ns.GLOBAL)),
-				 [op.RET, (op.CONST, None)]
-				], [('b', '<undef>')], None, None, [], {}
-		])
 
 	def test_13delete(self):
 		# delete a variable
@@ -607,6 +585,24 @@ class TestReblokBasics(unittest.TestCase):
 					 [(op.SET, (op.VAR, 'c', ns.LOCAL), (op.CONST, 0))], None],
 				 [op.RET, (op.CONST, None)]
 				], [], None, None, ['b'], {}
+		])
+
+
+	def test_15set(self):
+		def func():
+			foo = 'bar'
+			global bis
+			bis = 'bille'
+
+			array[42] = 3.14
+		tree = self.parser.walk(func)
+		self.assertEqual(tree,
+			[op.FUNC, 'func',
+				[(op.SET, (op.VAR, 'foo', ns.LOCAL) , (op.CONST, 'bar')),
+				 (op.SET, (op.VAR, 'bis', ns.GLOBAL), (op.CONST, 'bille')),
+				 (op.SET, (op.AT , (op.VAR, 'array', ns.GLOBAL), (op.CONST, 42)), (op.CONST, 3.14)),
+				 [op.RET, (op.CONST, None)]
+				], [], None, None, ['array', 'bis'], {}
 		])
 
 

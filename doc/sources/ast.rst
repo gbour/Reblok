@@ -125,6 +125,21 @@ Example::
     (SET, (VAR, 'countries'), (CONST, ('France', 'Spain', 'Belgium')))
   ]
 
+DEL
+...
+**(DEL, (VAR, 'foo'))**
+
+Delete a variable
+
+Example::
+  foo = 'bar'
+  del foo
+
+  [
+    (SET, (VAR, 'foo'), (CONST, 'bar')),
+    (DEL, (VAR, 'foo'))
+  ]
+
 DICT
 ....
 **(DICT, [initvals])**
@@ -172,15 +187,29 @@ arglist is the list we iter, loopvar is the inner variable for each iteration.
 instrs is the loop instructions list
 ret is the returned list (list comprehension), else None
 
+Note::
+  loopvar is either a variable (VAR) or a TUPLE of variables
+
+
 Example::
 
   for student in class.students:
     student.note = 0
 
   (FOR, 
-    'student', 
+    (VAR, 'student'), 
     (ATTR, (VAR, 'class'), 'students'), 
     [(SET, (ATTR, (VAR, 'student'), 'note'), (CONST, 0))], 
+    None
+  )
+
+  for (start, len) in statistics:
+    print 'start %d, len %d' % (start, len)
+
+  (FOR
+    (TUPLE, [(VAR, 'start'), (VAR, 'len')]),
+    (VAR, 'statistics'),
+    [(PRINT, None, [(MOD, (CONST, 'start %d, len %d'), (TUPLE, [(VAR, 'start'), (VAR, 'len')]))])],
     None
   )
 
@@ -522,9 +551,15 @@ Variable affectation
 
 Example::
 
-  popcorn = 472
+  popcorn   = 472
+  depth[10] = 3.14
+  (name, age) = ('doe', 21)
 
-  (SET, (VAR, 'popcorn'), (CONST, 472))
+  [
+    (SET, (VAR, 'popcorn'), (CONST, 472)),
+    (SET, (AT, (VAR, 'depth'), (CONST, 10)), (CONST, 3.14)),
+    (SET, (TUPLE, [(VAR, 'name'), (VAR, 'age')]), (TUPLE, [(CONST, 'doe'), (CONST, 21)]))
+  ]
 
 SLICE
 ...

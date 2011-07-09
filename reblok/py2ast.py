@@ -308,7 +308,7 @@ class Parser(object):
 		if sub:
 			return var
 
-		self.stack.append((opcodes.SET, var,	self.stack.pop(-2)))
+		self.stack.append((opcodes.SET, var,	self.stack.pop()))
 
 	def do_BINARY_SUBSCR(self, attr):
 		""" list[10] 
