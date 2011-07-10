@@ -1,0 +1,2289 @@
+['./unpyc.py', 'unpyc.pyc']
+<code object <module> at 0x9ce3a40, file "./unpyc.py", line 4> ['__class__', '__cmp__', '__delattr__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'co_argcount', 'co_cellvars', 'co_code', 'co_consts', 'co_filename', 'co_firstlineno', 'co_flags', 'co_freevars', 'co_lnotab', 'co_name', 'co_names', 'co_nlocals', 'co_stacksize', 'co_varnames']
+
+  4           1 LOAD_CONST           -1
+              2 LOAD_CONST           None
+              3 IMPORT_NAME          sys
+              4 STORE_NAME           sys
+              5 LOAD_CONST           -1
+              6 LOAD_CONST           None
+              7 IMPORT_NAME          marshal
+              8 STORE_NAME           marshal
+
+  5          10 LOAD_CONST           -1
+             11 LOAD_CONST           None
+             12 IMPORT_NAME          byteplay
+             13 STORE_NAME           byte
+
+  6          15 LOAD_CONST           -1
+             16 LOAD_CONST           ('*',)
+             17 IMPORT_NAME          reblok
+             18 IMPORT_STAR          
+
+  8          20 LOAD_CONST           <byteplay.Code object at 0x9dc3a8c>
+             21 MAKE_FUNCTION        0
+             22 STORE_NAME           dispatch
+
+ 11          24 LOAD_CONST           <byteplay.Code object at 0x9dc412c>
+             25 MAKE_FUNCTION        0
+             26 STORE_NAME           do_import
+
+ 21          28 LOAD_CONST           <byteplay.Code object at 0x9dc41ec>
+             29 MAKE_FUNCTION        0
+             30 STORE_NAME           do_function
+
+ 24          32 LOAD_CONST           <byteplay.Code object at 0x9dc428c>
+             33 MAKE_FUNCTION        0
+             34 STORE_NAME           do_if
+
+ 27          36 LOAD_CONST           <byteplay.Code object at 0x9dc440c>
+             37 MAKE_FUNCTION        0
+             38 STORE_NAME           do_ret
+
+ 31          40 LOAD_NAME            __name__
+             41 LOAD_CONST           '__main__'
+             42 COMPARE_OP           ==
+             43 JUMP_IF_FALSE        to 180
+             44 POP_TOP              
+
+ 34          46 LOAD_NAME            sys
+             47 LOAD_ATTR            argv
+             48 PRINT_ITEM           
+             49 PRINT_NEWLINE        
+
+ 35          51 LOAD_NAME            open
+             52 LOAD_NAME            sys
+             53 LOAD_ATTR            argv
+             54 LOAD_CONST           0
+             55 BINARY_SUBSCR        
+             56 CALL_FUNCTION        1
+             57 STORE_NAME           f
+
+ 36          59 LOAD_NAME            f
+             60 LOAD_ATTR            read
+             61 CALL_FUNCTION        0
+             62 STORE_NAME           c
+
+ 37          64 LOAD_NAME            f
+             65 LOAD_ATTR            close
+             66 CALL_FUNCTION        0
+             67 POP_TOP              
+
+ 39          69 LOAD_CONST           -1
+             70 LOAD_CONST           None
+             71 IMPORT_NAME          compiler
+             72 STORE_NAME           compiler
+
+ 40          74 LOAD_NAME            compiler
+             75 LOAD_ATTR            compileFile
+             76 LOAD_NAME            sys
+             77 LOAD_ATTR            argv
+             78 LOAD_CONST           0
+             79 BINARY_SUBSCR        
+             80 CALL_FUNCTION        1
+             81 POP_TOP              
+
+ 43          83 LOAD_NAME            open
+             84 LOAD_NAME            sys
+             85 LOAD_ATTR            argv
+             86 LOAD_CONST           1
+             87 BINARY_SUBSCR        
+             88 CALL_FUNCTION        1
+             89 STORE_NAME           f
+
+ 44          91 LOAD_NAME            f
+             92 LOAD_ATTR            seek
+             93 LOAD_CONST           8
+             94 CALL_FUNCTION        1
+             95 POP_TOP              
+
+ 46          97 LOAD_NAME            marshal
+             98 LOAD_ATTR            load
+             99 LOAD_NAME            f
+            100 CALL_FUNCTION        1
+            101 STORE_NAME           o
+
+ 47         103 LOAD_NAME            f
+            104 LOAD_ATTR            close
+            105 CALL_FUNCTION        0
+            106 POP_TOP              
+
+ 49         108 LOAD_NAME            o
+            109 PRINT_ITEM           
+            110 LOAD_NAME            dir
+            111 LOAD_NAME            o
+            112 CALL_FUNCTION        1
+            113 PRINT_ITEM           
+            114 PRINT_NEWLINE        
+
+ 56         116 LOAD_NAME            byte
+            117 LOAD_ATTR            Code
+            118 LOAD_ATTR            from_code
+            119 LOAD_NAME            o
+            120 CALL_FUNCTION        1
+            121 STORE_NAME           c
+
+ 57         123 LOAD_NAME            c
+            124 LOAD_ATTR            code
+            125 PRINT_ITEM           
+            126 PRINT_NEWLINE        
+
+ 58         128 LOAD_CONST           'plop function:'
+            129 PRINT_ITEM           
+
+ 59         131 LOAD_NAME            filter
+            132 LOAD_CONST           <byteplay.Code object at 0x9dc4f2c>
+            133 MAKE_FUNCTION        0
+            134 LOAD_NAME            c
+            135 LOAD_ATTR            code
+            136 CALL_FUNCTION        2
+            137 LOAD_CONST           0
+            138 BINARY_SUBSCR        
+            139 LOAD_CONST           1
+            140 BINARY_SUBSCR        
+            141 LOAD_ATTR            code
+            142 PRINT_ITEM           
+            143 PRINT_NEWLINE        
+
+ 61         145 LOAD_NAME            Parser
+            146 CALL_FUNCTION        0
+            147 LOAD_ATTR            walk
+            148 LOAD_NAME            o
+            149 CALL_FUNCTION        1
+            150 STORE_NAME           res
+
+ 62         152 LOAD_CONST           -1
+            153 LOAD_CONST           None
+            154 IMPORT_NAME          pprint
+            155 STORE_NAME           pprint
+            156 LOAD_NAME            pprint
+            157 LOAD_ATTR            pprint
+            158 LOAD_NAME            res
+            159 CALL_FUNCTION        1
+            160 POP_TOP              
+
+ 63         162 SETUP_LOOP           to 178
+            163 LOAD_NAME            res
+            164 GET_ITER             
+
+ 63     >>  167 FOR_ITER             to 176
+            168 STORE_NAME           instr
+
+ 64         170 LOAD_NAME            dispatch
+            171 LOAD_NAME            instr
+            172 CALL_FUNCTION        1
+            173 POP_TOP              
+            174 JUMP_ABSOLUTE        to 167
+        >>  176 POP_BLOCK            
+        >>  178 JUMP_FORWARD         to 182
+        >>  180 POP_TOP              
+        >>  182 LOAD_CONST           None
+            183 RETURN_VALUE         
+
+plop function: 
+  9           1 LOAD_GLOBAL          eval
+              2 LOAD_CONST           'do_%s'
+              3 LOAD_FAST            instr
+              4 LOAD_CONST           0
+              5 BINARY_SUBSCR        
+              6 BINARY_MODULO        
+              7 CALL_FUNCTION        1
+              8 LOAD_FAST            instr
+              9 CALL_FUNCTION        1
+             10 POP_TOP              
+             11 LOAD_CONST           None
+             12 RETURN_VALUE         
+
+ *** flashback label *** <byteplay.Label object at 0x9dc550c>
+ *** instruction not found *** [['import', 'sys', None, None], ['import', 'marshal', None, None], ['import', 'byteplay', None, 'byte'], ['import', 'reblok', '*', None], ['function', 'dispatch', ('const', <byteplay.Code object at 0x9dc590c>), []], ['function', 'do_import', ('const', <byteplay.Code object at 0x9dc5f8c>), []], ['function', 'do_function', ('const', <byteplay.Code object at 0x9dc606c>), []], ['function', 'do_if', ('const', <byteplay.Code object at 0x9dc610c>), []], ['function', 'do_ret', ('const', <byteplay.Code object at 0x9dc628c>), []], ['and', ('eq', ('var', '__name__'), ('const', '__main__')), None], ('call', ('attr', ('var', 'sys.stdout'), 'print'), ('attr', ('var', 'sys'), 'argv')), ('call', ('attr', ('var', 'sys.stdout'), 'print'), ('const', '\n')), ('set', ('var', 'f'), ('call', ('var', 'open'), [('at', ('attr', ('var', 'sys'), 'argv'), ('const', 0))])), ('set', ('var', 'c'), ('call', ('attr', ('var', 'f'), 'read'), [])), ('call', ('attr', ('var', 'f'), 'close'), []), ['import', 'compiler', None, None], ('call', ('attr', ('var', 'compiler'), 'compileFile'), [('at', ('attr', ('var', 'sys'), 'argv'), ('const', 0))]), ('set', ('var', 'f'), ('call', ('var', 'open'), [('at', ('attr', ('var', 'sys'), 'argv'), ('const', 1))])), ('call', ('attr', ('var', 'f'), 'seek'), [('const', 8)]), ('set', ('var', 'o'), ('call', ('attr', ('var', 'marshal'), 'load'), [('var', 'f')])), ('call', ('attr', ('var', 'f'), 'close'), []), ('call', ('attr', ('var', 'sys.stdout'), 'print'), ('var', 'o')), ('call', ('attr', ('var', 'sys.stdout'), 'print'), ('call', ('var', 'dir'), [('var', 'o')])), ('call', ('attr', ('var', 'sys.stdout'), 'print'), ('const', '\n')), ('set', ('var', 'c'), ('call', ('attr', ('attr', ('var', 'byte'), 'Code'), 'from_code'), [('var', 'o')])), ('call', ('attr', ('var', 'sys.stdout'), 'print'), ('attr', ('var', 'c'), 'code')), ('call', ('attr', ('var', 'sys.stdout'), 'print'), ('const', '\n')), ('call', ('attr', ('var', 'sys.stdout'), 'print'), ('const', 'plop function:')), ('call', ('attr', ('var', 'sys.stdout'), 'print'), ('attr', ('at', ('at', ('call', ('var', 'filter'), [['function', 'lambda', ('const', <byteplay.Code object at 0x9dc6dac>), []], ('attr', ('var', 'c'), 'code')]), ('const', 0)), ('const', 1)), 'code')), ('call', ('attr', ('var', 'sys.stdout'), 'print'), ('const', '\n')), ('set', ('var', 'res'), ('call', ('attr', ('call', ('var', 'Parser'), []), 'walk'), [('var', 'o')])), ['import', 'pprint', None, None], ('call', ('attr', ('var', 'pprint'), 'pprint'), [('var', 'res')]), ('set', ('var', 'instr'), ['for', None, ('var', 'res'), None, None]), ('call', ('var', 'dispatch'), [('var', 'instr')]), ['marker::jump', <byteplay.Label object at 0x9dc550c>]] ['for', None, ('var', 'res'), None, None]
+ *** flashback label *** <byteplay.Label object at 0x9dc54cc>
+[['import', 'sys', None, None],
+ ['import', 'marshal', None, None],
+ ['import', 'byteplay', None, 'byte'],
+ ['import', 'reblok', '*', None],
+ ['function', 'dispatch', ('const', <byteplay.Code object at 0x9dc590c>), []],
+ ['function', 'do_import', ('const', <byteplay.Code object at 0x9dc5f8c>), []],
+ ['function',
+  'do_function',
+  ('const', <byteplay.Code object at 0x9dc606c>),
+  []],
+ ['function', 'do_if', ('const', <byteplay.Code object at 0x9dc610c>), []],
+ ['function', 'do_ret', ('const', <byteplay.Code object at 0x9dc628c>), []],
+ ['if',
+  ('eq', ('var', '__name__'), ('const', '__main__')),
+  [('call',
+    ('attr', ('var', 'sys.stdout'), 'print'),
+    ('attr', ('var', 'sys'), 'argv')),
+   ('call', ('attr', ('var', 'sys.stdout'), 'print'), ('const', '\n')),
+   ('set',
+    ('var', 'f'),
+    ('call',
+     ('var', 'open'),
+     [('at', ('attr', ('var', 'sys'), 'argv'), ('const', 0))])),
+   ('set', ('var', 'c'), ('call', ('attr', ('var', 'f'), 'read'), [])),
+   ('call', ('attr', ('var', 'f'), 'close'), []),
+   ['import', 'compiler', None, None],
+   ('call',
+    ('attr', ('var', 'compiler'), 'compileFile'),
+    [('at', ('attr', ('var', 'sys'), 'argv'), ('const', 0))]),
+   ('set',
+    ('var', 'f'),
+    ('call',
+     ('var', 'open'),
+     [('at', ('attr', ('var', 'sys'), 'argv'), ('const', 1))])),
+   ('call', ('attr', ('var', 'f'), 'seek'), [('const', 8)]),
+   ('set',
+    ('var', 'o'),
+    ('call', ('attr', ('var', 'marshal'), 'load'), [('var', 'f')])),
+   ('call', ('attr', ('var', 'f'), 'close'), []),
+   ('call', ('attr', ('var', 'sys.stdout'), 'print'), ('var', 'o')),
+   ('call',
+    ('attr', ('var', 'sys.stdout'), 'print'),
+    ('call', ('var', 'dir'), [('var', 'o')])),
+   ('call', ('attr', ('var', 'sys.stdout'), 'print'), ('const', '\n')),
+   ('set',
+    ('var', 'c'),
+    ('call',
+     ('attr', ('attr', ('var', 'byte'), 'Code'), 'from_code'),
+     [('var', 'o')])),
+   ('call',
+    ('attr', ('var', 'sys.stdout'), 'print'),
+    ('attr', ('var', 'c'), 'code')),
+   ('call', ('attr', ('var', 'sys.stdout'), 'print'), ('const', '\n')),
+   ('call',
+    ('attr', ('var', 'sys.stdout'), 'print'),
+    ('const', 'plop function:')),
+   ('call',
+    ('attr', ('var', 'sys.stdout'), 'print'),
+    ('attr',
+     ('at',
+      ('at',
+       ('call',
+        ('var', 'filter'),
+        [['function',
+          'lambda',
+          ('const', <byteplay.Code object at 0x9dc6dac>),
+          []],
+         ('attr', ('var', 'c'), 'code')]),
+       ('const', 0)),
+      ('const', 1)),
+     'code')),
+   ('call', ('attr', ('var', 'sys.stdout'), 'print'), ('const', '\n')),
+   ('set',
+    ('var', 'res'),
+    ('call',
+     ('attr', ('call', ('var', 'Parser'), []), 'walk'),
+     [('var', 'o')])),
+   ['import', 'pprint', None, None],
+   ('call', ('attr', ('var', 'pprint'), 'pprint'), [('var', 'res')]),
+   ('set', ('var', 'instr'), ['for', None, ('var', 'res'), None, None]),
+   ('call', ('var', 'dispatch'), [('var', 'instr')]),
+   ['marker::jump', <byteplay.Label object at 0x9dc550c>]],
+  []],
+ ['ret', ('const', None)]]
+import sys
+import marshal
+import byteplay as byte
+from reblok import *
+Traceback (most recent call last):
+  File "./unpyc.py", line 64, in <module>
+    dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+  File "./unpyc.py", line 28, in do_ret
+    print "return(%s)" % dispatch(instr)
+  File "./unpyc.py", line 9, in dispatch
+    eval('do_%s' % instr[0])(instr)
+KeyError: 'unknown symbol table entry'
