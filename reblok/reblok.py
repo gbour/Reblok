@@ -181,10 +181,13 @@ class Reblok(object):
 	
 	### VARIABLE SET ###
 	def do_set(self, instr, **kwargs):
-		self._print("%s = %s" % (self._dispatch(instr[1]), self._dispatch(instr[2], noprint=True)))
+		self._print("%s = %s" % (self._dispatch(instr[1], noprint=True), self._dispatch(instr[2], noprint=True)))
 
 	### RETURN ###	
 	def do_ret(self, instr, **kwargs):
+		# we ignore return instruction if we are outside function
+		if self.depth == 0:
+			return
 		self._print("return %s" % self._dispatch(instr[1], noprint=True))
 	
 	### IMPORT ###	
@@ -208,9 +211,13 @@ class Reblok(object):
 			return ret
 	
 		self._print("")
-		self._print("def %s(self):" % instr[1])
+		self._print("def %s(%s):" % (instr[1], ','.join([arg[0] for arg in instr[3]])))
 		self.depth += 1
 	
+		# global variables
+		if len(instr[6]) > 0:
+			self._print("global %s" % ','.join(instr[6]))
+
 		for instr in instr[2]:
 			self._dispatch(instr)
 		self.depth -= 1
@@ -279,7 +286,7 @@ class Reblok(object):
 				self._print(ret)
 			return ret
 	
-		self._print("for %s in %s:" % (instr[1], self._dispatch(instr[2], noprint=True)))
+		self._print("for %s in %s:" % (self._dispatch(instr[1], noprint=True), self._dispatch(instr[2], noprint=True)))
 		self.depth += 1
 		
 		for instr in instr[3]:
@@ -287,4 +294,11 @@ class Reblok(object):
 		self.depth -= 1
 
 		return ""
-	
+
+	def do_break(self, instr, **kwargs):
+		self._print("break")
+
+	def do_del(self, instr, **kwargs):
+		self._print("del %s" % self._dispatch(instr[1], noprint=True))
+
+

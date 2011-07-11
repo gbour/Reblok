@@ -74,6 +74,7 @@ MOD       = 'mod'
 RET       = 'ret'
 IF        = 'if'
 FOR       = 'for'
+BREAK     = 'break'
 
 ## IMPORT 
 IMPORT    = 'import'

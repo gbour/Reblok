@@ -25,7 +25,7 @@ __license__ = "GPLv3"
 
 	TOS == Top Of Stack
 """
-import types
+import sys, types
 import byteplay as byte
 import opcodes
 import namespaces
@@ -184,6 +184,7 @@ class Parser(object):
 		self.stack.append((opcodes.DEL, (opcodes.VAR, attr, namespaces.LOCAL)))
 
 	def do_DELETE_GLOBAL(self, attr):
+		self.globals[attr] = None
 		self.stack.append((opcodes.DEL, (opcodes.VAR, attr, namespaces.GLOBAL)))
 
 	def do_LOAD_ATTR(self, attr):
@@ -758,6 +759,10 @@ class Parser(object):
 	def do_POP_BLOCK(self, attr):
 		pass
 
+	### LOOPS/ITERATIONS ###
+	def do_BREAK_LOOP(self, attr):
+		self.stack.append((opcodes.BREAK,))
+
 	def do_GET_ITER(self, attr):
 		"""
 			param 1: loop variable
@@ -800,14 +805,14 @@ class Parser(object):
 
 	def do_LABEL(self, label):
 		if label not in self.jumps:
-			print " *** flashback label ***", label
+			print >>sys.stderr, " *** flashback label ***", label
 			return
 			
 
 		for instr in self.jumps[label]:
 			i = self.stack_index(instr)
 			if i is None:
-				print " *** instruction not found ***", self.stack, instr; continue
+				print >>sys.stderr, " *** instruction not found ***", self.stack, instr; continue
 
 			do_iter = True
 
