@@ -464,17 +464,22 @@ class TestReblokBasics(unittest.TestCase):
 	def test_11loop(self):
 		def fnc():
 			for i in xrange(10):
+				if i > 5:
+					break
 				print i
 		tree = self.parser.walk(fnc)
 		self.assertEqual(tree,
 			[op.FUNC, 'fnc', [
 				[op.FOR, (op.VAR, 'i', ns.LOCAL), 
 					[op.CALL, (op.VAR, 'xrange', ns.GLOBAL), [(op.CONST, 10)], {}, None, None],
-					[(op.PRINT, None, [(op.VAR, 'i', ns.LOCAL), (op.CONST, '\n')])],
-					None],
+					[
+						[op.IF, (op.GT, (op.VAR, 'i', ns.LOCAL), (op.CONST, 5)), [(op.BREAK,)],	[]],
+						(op.PRINT, None, [(op.VAR, 'i', ns.LOCAL), (op.CONST, '\n')])
+					], None],
 				[op.RET, (op.CONST, None)]
-				], [], None, None, ['xrange'], {}
+			], [], None, None, ['xrange'], {}
 		])
+
 
 	def test_12print(self):
 		def printall():
@@ -550,7 +555,7 @@ class TestReblokBasics(unittest.TestCase):
 				 (op.DEL, (op.VAR, 'b', ns.LOCAL)),
 				 (op.DEL, (op.VAR, 'c', ns.GLOBAL)),
 				 [op.RET, (op.CONST, None)]
-				], [('b', '<undef>')], None, None, [], {}
+				], [('b', '<undef>')], None, None, ['c'], {}
 		])
 
 
