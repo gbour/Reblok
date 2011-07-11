@@ -84,6 +84,25 @@ Example::
 
   (PRINT, None, [(ATTR, (VAR, captain), 'age'), (CONST, '\n')])
 
+BREAK
+.....
+**(BREAK,)**
+
+Break a loop
+
+Example::
+
+  for i in xrange(10):
+    break
+
+  (FOR, 
+    (VAR, 'i'), 
+    (CALL, (VAR, 'xrange'), [(CONST, 10)], {}, None, None),
+    [(BREAK,)],
+    None
+  )
+
+
 CALL
 ....
 **(CALL, function, args, kwargs, vaargs, kwvaargs)**
