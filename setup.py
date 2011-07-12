@@ -31,7 +31,7 @@ class BuildDebianPackage(Command):
 
 setup(
 	name         = 'reblok',
-	version      = '0.1.1',
+	version      = '0.1.2',
 	description  = 'Python decompiler',
 	author       = 'Guillaume Bour',
 	author_email = 'guillaume@bour.cc',
