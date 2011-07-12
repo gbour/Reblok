@@ -36,6 +36,7 @@ setup(
 	author       = 'Guillaume Bour',
 	author_email = 'guillaume@bour.cc',
 	url          = 'http://devedge.bour.cc/wiki/Reblok',
+	download_url = 'http://devedge.bour.cc/resources/reblok/src/reblok.latest.tar.gz',
 	license      = 'GNU General Public License v3',
 	classifiers  = [
 		'Development Status :: 4 - Beta',
@@ -58,7 +59,7 @@ setup(
 
 	long_description = """Reblok build an Abstract Syntax Tree (AST) from python bytecode
 
-	Example::
+Example::
 
 	>>> from reblok import Parser
 	>>> add = lambda x: x + 1
