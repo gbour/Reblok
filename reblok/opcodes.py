@@ -75,6 +75,7 @@ RET       = 'ret'
 IF        = 'if'
 FOR       = 'for'
 BREAK     = 'break'
+TRYCATCH  = 'try'
 
 ## IMPORT 
 IMPORT    = 'import'
@@ -90,4 +91,4 @@ MARKER_IFFALSE  = 'marker::iffalse'
 MARKER_IFTRUE   = 'marker::iftrue'
 MARKER_JUMP     = 'marker::jump'
 MARKER_POPTOP   = 'marker::poptop'
-
+MARKER_EXCEPT   = 'marker::except'

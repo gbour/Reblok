@@ -1,19 +1,19 @@
 # -*- coding: utf8 -*-
 """
-    reblok, python decompiler, AST builder
-    Copyright (C) 2010-2011, Guillaume Bour <guillaume@bour.cc>
+	reblok, python decompiler, AST builder
+	Copyright (C) 2010-2011, Guillaume Bour <guillaume@bour.cc>
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, version 3.
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, version 3.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 __author__  = "Guillaume Bour <guillaume@bour.cc>"
 __version__ = "$Revision$"
@@ -29,6 +29,11 @@ import sys, types
 import byteplay as byte
 import opcodes
 import namespaces
+
+def is_STORE(opcode):
+	return opcode in (byte.STORE_NAME, byte.STORE_FAST, byte.STORE_GLOBAL,
+			byte.STORE_DEREF)
+
 
 class CodeGenerator(object):
 	"""Opcodes generator
@@ -56,14 +61,13 @@ class CodeGenerator(object):
 		step = 0
 
 		while i < len(self.code) and step < at:
-
 			if self.code[i][0] == byte.SetLineno:
 				i += 1; continue
 
 			i    += 1
 			step += 1
 
-		return self.code[self.i + step] if i < len(self.code) else (None, None)
+		return self.code[i-1] if i < len(self.code) else (None, None)
 
 	def nexthop(self):
 		i = self.i + 1
@@ -436,7 +440,7 @@ class Parser(object):
 			function definition
 		"""
 		assert self.stack[-1][0] == opcodes.CONST and\
-		       isinstance(self.stack[-1][1], byte.Code)
+			   isinstance(self.stack[-1][1], byte.Code)
 
 		# get function content and decode it
 		opcode, func = self.stack.pop()
@@ -579,19 +583,58 @@ class Parser(object):
 	### BOOLEAN OPS ###
 
 	COMPARE_MAP = {
-		'is'    : opcodes.ID,
-		'is not': opcodes.NID,
-		'=='    : opcodes.EQ,
-		'!='    : opcodes.NEQ,
-		'>'     : opcodes.GT,
-		'<'     : opcodes.LT,
-		'>='    : opcodes.GEQ,
-		'<='    : opcodes.LEQ,
-		'in'    : opcodes.IN,
-		'not in': opcodes.NIN,
+		'is'             : opcodes.ID,
+		'is not'         : opcodes.NID,
+		'=='             : opcodes.EQ,
+		'!='             : opcodes.NEQ,
+		'>'              : opcodes.GT,
+		'<'              : opcodes.LT,
+		'>='             : opcodes.GEQ,
+		'<='             : opcodes.LEQ,
+		'in'             : opcodes.IN,
+		'not in'         : opcodes.NIN,
+
+		#try:except exception comparison
+		'exception match': opcodes.MARKER_EXCEPT
 	}
 
 	def do_COMPARE_OP(self, attr):
+		"""boolean operation"""
+		if self.COMPARE_MAP[attr] == opcodes.MARKER_EXCEPT:
+			"""except: COMPARE_OP is followed by:
+					- JUMP_IF_FALSE
+					- POP_TOP (*2)
+					- STORE_NAME
+					- POP_TOP
+
+				and precedeed by a 
+					- DUP_TOP
+					- LOAD_NAME Exception
+			"""
+			self.stack.pop(-2)
+
+			assert self.code.predict()[0] == byte.JUMP_IF_FALSE
+			jmp = self.code.nexthop()
+			
+			while self.code.predict()[0] == byte.POP_TOP:
+				self.code.nexthop()
+			# STORE_XXX (facultative)
+			if is_STORE(self.code.predict()[0]):
+				opcode, attr = self.code.nexthop()
+				getattr(self, 'do_%s' % opcode)(attr)
+
+				while self.code.predict()[0] == byte.POP_TOP:
+					self.code.nexthop()
+
+				store = self.stack.pop()
+			else:
+				store = (None, None, self.stack.pop())
+			self.stack[-1][1] = (store[2], store[1])
+
+			node = self.jumps.setdefault(jmp[1], [])
+			node.insert(0, self.stack[-1])
+			return
+
 		self.stack[-1] = (self.COMPARE_MAP[attr], self.stack.pop(-2), self.stack[-1])
 
 	def do_UNARY_NOT(self, attr):
@@ -692,6 +735,11 @@ class Parser(object):
 		self.stack[-1][2].append((attr, alias))
 
 	### CONDITIONAL/UNCONDITIONAL JUMPS (if, else) ###
+	"""
+	def do_POP_JUMP_IF_FALSE(self, attr):
+		print self.stack
+		raise Exception
+	"""
 	def do_JUMP_IF_FALSE(self, attr):
 		jmp = [opcodes.AND, self.stack[-1], None]
 		# POP_TOP must not stack ou our AND instr, but its 1st argument
@@ -735,16 +783,24 @@ class Parser(object):
 		self.jumps[attr].insert(0, self.stack[-1])
 
 	def do_JUMP_FORWARD(self, attr):
-		if isinstance(self.code.predict()[0], byte.Label): # jump destination
+		#_next = self.code.predict()
+		#if isinstance(_next[0], byte.Label): # jump destination
+		if isinstance(self.code.predict()[0], byte.Label):
 			jmp = [opcodes.MARKER_JUMP, attr]
 			self.stack.append(jmp)
 
 			self.do_LABEL(self.code.nexthop()[0])
 
-			if self.code.predict()[0] == byte.POP_TOP:
+			#if self.code.predict()[0] == byte.POP_TOP:
+			while self.code.predict()[0] == byte.POP_TOP:
 				self.code.nexthop()
-		else:
-			assert False
+		#elif _next[0] == byte.END_FINALLY:
+
+		if self.code.predict()[0] == byte.END_FINALLY:
+			# just eat the END_FINALLY
+			self.code.nexthop(); return
+		#else:
+		#	assert False
 
 		node = self.jumps.setdefault(attr, [])
 		#self.jumps[attr].insert(0, self.stack[-1])
@@ -752,12 +808,65 @@ class Parser(object):
 		if len(node) == 0 or node[0] != self.stack[-1]:
 			node.insert(0, self.stack[-1])
 
+		#print '>>', self.jumps
+
 	### LIST/LIST COMPREHENSION ###
 	def do_SETUP_LOOP(self, attr):
 		pass
 
 	def do_POP_BLOCK(self, attr):
 		pass
+
+	### TRY/EXCEPT/FINALLY ###
+	def do_SETUP_FINALLY(self, attr):
+		block = [opcodes.TRYCATCH, None, None, None, True]
+		self.stack.append(block)
+
+		node = self.jumps.setdefault(attr, [])
+		node.insert(0,  block)
+
+
+	def do_SETUP_EXCEPT(self, attr):
+		"""
+			attr is the position (label) where starts the except clause
+
+			opcode args:
+				. except Exception and variable
+				. try block
+				. except block
+				. finally block
+		"""
+		#print 'except', attr
+		# if we have both except: and finally: blocs, 
+		# SETUP_EXCEPT follows SETUP_FINALLY
+		if len(self.stack) > 0 and self.stack[-1][0] == opcodes.TRYCATCH and\
+			 self.stack[-1][4] == True:
+			block = self.stack[-1]
+			block[-2] = True
+		else:
+			block = [opcodes.TRYCATCH, None, None, True, None]	
+			self.stack.append(block)
+
+		node = self.jumps.setdefault(attr, [])
+		node.insert(0, block)
+
+	def do_END_FINALLY(self, attr):
+		tryb = None
+		for i in xrange(len(self.stack)-1,-1,-1):
+			if self.stack[i][0] == opcodes.TRYCATCH:
+				tryb = self.stack[i];	break
+
+		#if tryb is None or tryb[-1] is not True:
+		if tryb is None or not (tryb[-1] is True or isinstance(tryb[-1], list) and
+				len(tryb[-1]) == 0):
+			#raise Exception
+			return
+
+		pos = self.stack.index(tryb)
+		tryb[-1] = self.stack[pos+1:]
+		del self.stack[pos+1:]
+
+
 
 	### LOOPS/ITERATIONS ###
 	def do_BREAK_LOOP(self, attr):
@@ -804,12 +913,15 @@ class Parser(object):
 		self.stack[-1][1] = getattr(self, 'do_%s' % opcode)(arg, sub=True)
 
 	def do_LABEL(self, label):
+		#print 'LBL=', label
 		if label not in self.jumps:
 			print >>sys.stderr, " *** flashback label ***", label
 			return
 			
 
 		for instr in self.jumps[label]:
+			#print instr
+			#import pprint; pprint.pprint(self.stack)
 			i = self.stack_index(instr)
 			if i is None:
 				print >>sys.stderr, " *** instruction not found ***", self.stack, instr; continue
@@ -827,9 +939,36 @@ class Parser(object):
 			if do_iter:
 				prev = self.stack.pop()
 			while do_iter:
-				top = self.stack.pop()
+				top = self.stack.pop() if len(self.stack) > 0 else None
 
-				if prev[0] == opcodes.MARKER_JUMP and\
+				# TRY/EXCEPT
+				if instr[0] == opcodes.TRYCATCH:
+					idx = -1
+					if instr[2] is None:
+						#assert prev[0] == opcodes.MARKER_JUMP
+						idx = 2
+					elif instr[3] in (True, None):
+						idx = 3
+					elif instr[4] in (True, None):
+						idx = 4
+
+					#print ">>", instr, idx, prev, top, self.stack
+					blok = self.stack[i+1:]
+					if top is not None and top != instr:
+						blok.append(top)
+					if prev != instr and prev[0] != opcodes.MARKER_JUMP and not\
+						 (prev[0] == opcodes.CONST and prev[1] is None):
+						blok.append(prev)
+
+					if len(blok) > 0 or instr[idx] is True:
+						instr[idx] = blok
+
+					if len(self.stack) > 0:
+						self.stack.pop() # unstack for() temporary
+					top = instr
+
+
+				elif prev[0] == opcodes.MARKER_JUMP and\
 					 instr[0] == opcodes.FOR:
 					assert instr[3] is None
 
@@ -839,6 +978,7 @@ class Parser(object):
 
 					self.stack.pop() # unstack for() temporary
 					top = instr
+
 
 				elif prev[0] == opcodes.MARKER_JUMP or\
 				   prev[0] == opcodes.RET:
@@ -953,3 +1093,4 @@ class Parser(object):
 
 	def do_BUILD_CLASS(self, attr):
 		pass
+

@@ -1,20 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 """
-    reblok, python decompiler, AST builder
-    Copyright (C) 2010-2011, Guillaume Bour <guillaume@bour.cc>
+	reblok, python decompiler, AST builder
+	Copyright (C) 2010-2011, Guillaume Bour <guillaume@bour.cc>
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, version 3.
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, version 3.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 __author__  = "Guillaume Bour <guillaume@bour.cc>"
 __version__ = "$Revision$"
@@ -609,6 +609,192 @@ class TestReblokBasics(unittest.TestCase):
 				 [op.RET, (op.CONST, None)]
 				], [], None, None, ['array', 'bis'], {}
 		])
+
+	def test_16try(self):
+		#CASE #1: no finally clause, except match all
+		def case1():
+			try:
+				a=1
+			except:
+				print 'failure'
+		tree = self.parser.walk(case1)
+		self.assertEqual(tree,
+			[op.FUNC, 'case1',
+				[[op.TRYCATCH, None, 
+					[(op.SET, (op.VAR, 'a', ns.LOCAL), (op.CONST, 1))], 
+					[(op.PRINT, None, [(op.CONST, 'failure'), (op.CONST, '\n')])], 
+					None],
+				 [op.RET, (op.CONST, None)]
+				], [], None, None, [], {}
+		])
+
+
+		# CASE #2: except with named exception
+		def case2():
+			try:
+				a=1
+			except ValueError:
+				print 'failure'
+
+		tree = self.parser.walk(case2)
+		self.assertEqual(tree,
+			[op.FUNC, 'case2',
+				[[op.TRYCATCH,
+					((op.VAR, 'ValueError', ns.GLOBAL), None), 
+					[(op.SET, (op.VAR, 'a', ns.LOCAL), (op.CONST, 1))], 
+					[(op.PRINT, None, [(op.CONST, 'failure'), (op.CONST, '\n')])], 
+					None],
+				 [op.RET, (op.CONST, None)]
+				], [], None, None, ['ValueError'], {}
+		])
+
+		# CASE #3: except defined, but without instructions
+		#   - except clause must be empty list ([])
+		#   - while finally clause must be None
+		def case3():
+			try:
+				a=1
+			except ValueError:
+				pass
+
+		tree = self.parser.walk(case3)
+		self.assertEqual(tree,
+			[op.FUNC, 'case3',
+				[[op.TRYCATCH,
+					((op.VAR, 'ValueError', ns.GLOBAL), None), 
+					[(op.SET, (op.VAR, 'a', ns.LOCAL), (op.CONST, 1))], 
+					[],
+					None],
+				 [op.RET, (op.CONST, None)]
+				], [], None, None, ['ValueError'], {}
+		])
+
+		# CASE #4: except, with exception set in variable
+		def case4():
+			try:
+				a=1
+			except ValueError, e:
+				print e
+
+		tree = self.parser.walk(case4)
+		self.assertEqual(tree,
+			[op.FUNC, 'case4',
+				[[op.TRYCATCH,
+					((op.VAR, 'ValueError', ns.GLOBAL), (op.VAR, 'e', ns.LOCAL)), 
+					[(op.SET, (op.VAR, 'a', ns.LOCAL), (op.CONST, 1))], 
+					[(op.PRINT, None, [(op.VAR, 'e', ns.LOCAL), (op.CONST, '\n')])], 
+					None],
+				 [op.RET, (op.CONST, None)]
+				], [], None, None, ['ValueError'], {}
+		])
+
+		# CASE #5: same as #4, but with global variable
+		def case5():
+			global e
+			try:
+				a=1
+			except ValueError, e:
+				print e
+
+		tree = self.parser.walk(case5)
+		self.assertEqual(tree,
+			[op.FUNC, 'case5',
+				[[op.TRYCATCH,
+					((op.VAR, 'ValueError', ns.GLOBAL), (op.VAR, 'e', ns.GLOBAL)), 
+					[(op.SET, (op.VAR, 'a', ns.LOCAL), (op.CONST, 1))], 
+					[(op.PRINT, None, [(op.VAR, 'e', ns.GLOBAL), (op.CONST, '\n')])], 
+					None],
+				 [op.RET, (op.CONST, None)]
+				], [], None, None, ['ValueError', 'e'], {}
+		])
+
+
+		# CASE #10: finally clause
+		def case10():
+			try:
+				a=1
+			finally:
+				print 'passed'
+
+		tree = self.parser.walk(case10)
+		self.assertEqual(tree,
+			[op.FUNC, 'case10',
+				[[op.TRYCATCH,
+					None,
+					[(op.SET, (op.VAR, 'a', ns.LOCAL), (op.CONST, 1))], 
+					None,
+					[(op.PRINT, None, [(op.CONST, 'passed'), (op.CONST, '\n')])]
+				 ], 
+				 [op.RET, (op.CONST, None)]
+				], [], None, None, [], {}
+		])
+
+		# CASE #11: except+finally
+		def case11():
+			try:
+				a=1
+			except Exception, e:
+				print e
+			finally:
+				print a
+
+		tree = self.parser.walk(case11)
+		self.assertEqual(tree,
+			[op.FUNC, 'case11',
+				[[op.TRYCATCH,
+					((op.VAR, 'Exception', ns.GLOBAL), (op.VAR, 'e', ns.LOCAL)), 
+					[(op.SET, (op.VAR, 'a', ns.LOCAL), (op.CONST, 1))],
+					[(op.PRINT, None, [(op.VAR, 'e', ns.LOCAL), (op.CONST, '\n')])], 
+					[(op.PRINT, None, [(op.VAR, 'a', ns.LOCAL), (op.CONST, '\n')])]
+				 ], 
+				 [op.RET, (op.CONST, None)]
+				], [], None, None, ['Exception'], {}
+		])
+
+		# CASE #12: except+finally (no exception)
+		def case12():
+			try:
+				a=1
+			except:
+				print 'fail'
+			finally:
+				print a
+
+		tree = self.parser.walk(case12)
+		self.assertEqual(tree,
+			[op.FUNC, 'case12',
+				[[op.TRYCATCH,
+					None,
+					[(op.SET, (op.VAR, 'a', ns.LOCAL), (op.CONST, 1))],
+					[(op.PRINT, None, [(op.CONST, 'fail'), (op.CONST, '\n')])], 
+					[(op.PRINT, None, [(op.VAR, 'a', ns.LOCAL), (op.CONST, '\n')])]
+				 ], 
+				 [op.RET, (op.CONST, None)]
+				], [], None, None, [], {}
+		])
+
+		# CASE #13: except+finally (empty code)
+		def case13():
+			try:
+				a=1
+			except:
+				pass
+			finally:
+				pass
+
+		tree = self.parser.walk(case13)
+		self.assertEqual(tree,
+			[op.FUNC, 'case13',
+				[[op.TRYCATCH,
+					None,
+					[(op.SET, (op.VAR, 'a', ns.LOCAL), (op.CONST, 1))],
+					[],
+					[]
+				 ], 
+				 [op.RET, (op.CONST, None)]
+				], [], None, None, [], {}
+		])
+
 
 
 	def test_20funcdef(self):

@@ -614,6 +614,37 @@ Example::
 
  (SET, (VAR, 'result'), (SUB, (VAR, 'beer_cnt'), 1))
 
+TRY
+...
+**(TRY, (Exception, except-variable), try-clause, except-clause, finally-clause)**
+
+try: except: finally: statement
+
+* if except clause is not present, 2d value (exception+variable) is None, as except-clause
+* if neither exception nor except variable as set in expect clause, 2d argument is None
+* if finally clause is not present, finally-clause is None
+* if except clause is empty (`pass`), except-clause is empty list
+* if finally clause is empty (`pass`), finally-clause is empty list
+
+Example::
+
+ try:
+   a = 1
+ except ValueError, e:
+   print e
+ finally
+   print 'pass'
+
+ (TRY, ((VAR, 'ValueError'), (VAR, 'e')), [(SET, (VAR, 'a'), (CONST, 1))], [(PRINT, None, [(VAR, 'e'), (CONST, '\n')])], [(PRINT, None, [(CONST, 'pass'), (CONST, '\n')])])
+
+
+ try:
+   a = 1
+ except:
+   pass
+
+ (TRY, None, [(SET, (VAR, 'a'), (CONST, 1))], [], None)
+
 TUPLE
 ....
 **(TUPLE, [values])**
