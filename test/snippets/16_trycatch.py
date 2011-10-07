@@ -15,7 +15,7 @@ finally:
 
 try:
 	c = 3
-except ValueError, v:
-	print 'value error:', v
+#except ValueError, v:
+#	print 'value error:', v
 finally:
 	print 'just do it'

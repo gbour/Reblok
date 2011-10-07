@@ -301,4 +301,38 @@ class Reblok(object):
 	def do_del(self, instr, **kwargs):
 		self._print("del %s" % self._dispatch(instr[1], noprint=True))
 
+	# Exceptions handling (try-except-finally)
+	def do_try(self, instr, **kwargs):
+		self._print("try:")
+		self.depth += 1
+	
+		for i in instr[2]:
+			self._dispatch(i)
+		self.depth -= 1
+
+		if instr[3] is not None:
+			ex = 'except'
+			if instr[1] is not None:
+				exname = instr[1][0]
+				if exname is not None:
+					ex += ' '+self._dispatch(exname, noprint=True)
+
+					if instr[1][1] is not None:
+						ex += ', '+self._dispatch(instr[1][1], noprint=True)
+
+			self._print(ex+':')
+			self.depth += 1
+
+			for i in instr[3]:
+				self._dispatch(i)
+			self.depth -= 1
+
+		if instr[4] is not None:
+			self._print('finally:')
+			self.depth += 1
+
+			for i in instr[4]:
+				self._dispatch(i)
+			self.depth -= 1
+
 
