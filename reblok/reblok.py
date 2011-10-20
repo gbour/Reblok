@@ -181,7 +181,12 @@ class Reblok(object):
 	
 	### VARIABLE SET ###
 	def do_set(self, instr, **kwargs):
-		self._print("%s = %s" % (self._dispatch(instr[1], noprint=True), self._dispatch(instr[2], noprint=True)))
+		target = self._dispatch(instr[1], noprint=True)
+		# docstring
+		if target == '__doc__':
+			self._print("\"\"\"%s\"\"\"" % self._dispatch(instr[2],	noprint=True)[1:-1].replace('\\n','\n'))
+		else:
+			self._print("%s = %s" % (target, self._dispatch(instr[2], noprint=True)))
 
 	### RETURN ###	
 	def do_ret(self, instr, **kwargs):
